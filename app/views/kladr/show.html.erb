@@ -1,0 +1,27 @@
+<h1>Kladr#show</h1>
+<p>Find me in app/views/kladr/show.html.erb</p>
+<h2><%= @entity.name %></h2>
+
+
+<% unless @children.blank? %>
+  <% @children.each do |child| %>
+   <p><%#= link_to_if !(child.children.blank? && child.street.blank?), child.name, kladr_show_path(:code => child.code) %></p>
+   <p><%= link_to child.name, kladr_show_path(:code => child.code) %></p>
+  <% end %>
+<% end %>
+
+<h3>улицы</h3>
+<% unless @street.blank? %>
+  <% @street.each do |street| %>
+   <p><%#= street.name %></p>
+   <p><%= link_to street.name, kladr_street_path(:code => street.code) %></p>
+  <% end %>
+<% end %>
+
+<h3>Дома</h3>
+<% unless @doma.blank? %>
+  <% @doma.each do |dom| %>
+   <p><%#= street.name %></p>
+   <p><%= link_to dom.name, kladr_doma_path(:code => dom.code) %></p>
+  <% end %>
+<% end %>

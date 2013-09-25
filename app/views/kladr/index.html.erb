@@ -1,0 +1,8 @@
+<h1>Kladr#index</h1>
+<p>Find me in app/views/kladr/index.html.erb</p>
+
+<% unless @regions.blank? %>
+  <% @regions.each do |region| %>
+   	<p><%= link_to region.name, kladr_show_path(:code => region.code) %></p>
+  <% end %>
+<% end %>

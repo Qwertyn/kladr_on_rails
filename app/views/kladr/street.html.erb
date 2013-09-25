@@ -1,0 +1,12 @@
+<h1>Kladr#street</h1>
+<p>Find me in app/views/kladr/street.html.erb</p>
+<h2><%= @entity.name %></h2>
+
+
+<% unless @doma.blank? %>
+  <% @doma.each do |dom| %>
+   <p><%#= link_to_if !(child.children.blank? && child.street.blank?), child.name, kladr_show_path(:code => child.code) %></p>
+   <p><%#= link_to child.name, kladr_show_path(:code => child.code) %></p>
+   <p><%= dom.name %></p>
+  <% end %>
+<% end %>

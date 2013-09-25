@@ -1,4 +1,12 @@
 KladrOnRails::Application.routes.draw do
+
+  get '/kladr', to: 'kladr#index', as: 'kladr'
+  get 'kladr/:code', to: 'kladr#show', as: 'kladr_show'
+  get 'street/:code', to: 'kladr#street', as: 'kladr_street'
+  get 'doma/:code', to: 'kladr#doma', as: 'kladr_doma'
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
