@@ -1,7 +1,15 @@
 <h1>Kladr#show</h1>
 <p>Find me in app/views/kladr/show.html.erb</p>
-<h2><%= @entity.name %></h2>
 
+<p>
+<%= link_to 'КЛАДР', kladr_path %>
+<% if @parents.present? %>
+  <% @parents.each do |parent| %>
+    <%= link_to " / #{parent.name}", kladr_show_path(:code => parent.code) %>
+  <% end %>
+<% end %>
+<%= " / #{@entity.name}" %>
+</p>
 
 <% unless @children.blank? %>
   <% @children.each do |child| %>

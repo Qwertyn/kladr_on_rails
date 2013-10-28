@@ -20,9 +20,16 @@ production:
   database: kladr_production
 
 # Сам КЛАДР будет храниться в одной БД для всех сред
+# kladr:
+  # adapter: mysql2
+  # host: localhost
+  # username: root
+  # password:
+  # database: kladr
+
 kladr:
-  adapter: mysql2
+  adapter: postgresql
   host: localhost
-  username: root
+  username: administrator
   password:
   database: kladr

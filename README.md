@@ -19,37 +19,35 @@
     -- initialize_schema_migrations_table()
     -> 0.3293s
 
+Определение схемы БД КЛАДРа
+ 
+    $ RAILS_ENV=kladr rake kladr:define_schema_kladr_db
+
+
 ## Загрузка данных из таблиц КЛАДРа
 
 Загрузка данных из KLADR.DBF
 
     $ RAILS_ENV=kladr rake kladr:init_data_kladr
 
-    -- create_table("KLADR")
-    -> 0.3483s
     Загружено записей: 212453 из 212453
-    Затрачено времени: 00:06:41
+    Затрачено времени: 00:07:11
 
 
 Загрузка данных из STREET.DBF
 
     $ RAILS_ENV=kladr rake kladr:init_data_street
 
-    -- create_table("STREET")
-    -> 0.4719s
     Загружено записей: 987387 из 987387
-    Затрачено времени: 00:28:52
+    Затрачено времени: 00:38:39
 
 
 Загрузка данных из DOMA.DBF
 
     $ RAILS_ENV=kladr rake kladr:init_data_doma
 
-    -- create_table("DOMA")
-    -> 0.0928s
     Загружено записей: 2115950 из 2115950
-    Затрачено времени: 01:01:41
-
+    Затрачено времени: 01:27:53
 
 ----
 

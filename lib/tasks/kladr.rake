@@ -17,12 +17,38 @@ namespace :kladr do
     # TODO реализовать unzip разными утилитами
   end
 
+# Про DBF
+# stackoverflow.com/questions/9395683/how-to-migrate-dbase-database-in-rails
+# https://github.com/infused/dbf/blob/master/README.md
+
+  desc "Определение схемы БД КЛАДРа"
+  task :define_schema_kladr_db => [:environment]  do
+    tables = %w[KLADR STREET DOMA]
+    tables.each do |table|
+      t = DBF::Table.new("tmp/base/#{table}.DBF")
+      eval(t.schema)
+    end
+
+    schema_indexes = %Q{
+ActiveRecord::Schema.define do
+  add_index "KLADR", :name
+  add_index "KLADR", :code
+
+  add_index "STREET", :name
+  add_index "STREET", :code
+
+  add_index "DOMA", :name
+  add_index "DOMA", :code
+end
+}
+    eval(schema_indexes)
+    puts "Определение схемы БД КЛАДРа прошло успешно"
+  end
+
 
   desc "Загрузка данных из KLADR.DBF"
   task :init_data_kladr => [:environment]  do
     table = DBF::Table.new("tmp/base/KLADR.DBF")
-    eval(table.schema)
-    Kladr.reset_column_information
     total = table.record_count
     start_time = Time.now
     k = 0
@@ -49,8 +75,6 @@ namespace :kladr do
   desc "Загрузка данных из STREET.DBF"
   task :init_data_street => [:environment]  do
     table = DBF::Table.new("tmp/base/STREET.DBF")
-    eval(table.schema)
-    Street.reset_column_information
     total = table.record_count
     start_time = Time.now
     k = 0
@@ -76,8 +100,6 @@ namespace :kladr do
   desc "Загрузка данных из DOMA.DBF"
   task :init_data_doma => [:environment]  do
     table = DBF::Table.new("tmp/base/DOMA.DBF")
-    eval(table.schema)
-    Doma.reset_column_information
     total = table.record_count
     start_time = Time.now
     k = 0

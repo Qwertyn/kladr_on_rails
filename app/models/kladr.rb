@@ -14,7 +14,6 @@ class Kladr < ActiveRecord::Base
     where("code LIKE ?", "__00000000000")
   end
 
-
   def entity_level_1
     # тут тока из таблицы кладр
   end
@@ -47,6 +46,19 @@ class Kladr < ActiveRecord::Base
     end
   end
 
+  def parent
+    if code =~ /^\d{2}0*$/
+      nil
+    elsif (code =~ /^\d{5}0*$/) || (code =~ /^\d{2}000\d{3}0*$/) || (code =~ /^\d{2}000000\d{3}0*$/)
+      Kladr.where("code LIKE ?", "#{code[0..1]}00000000000").first
+    elsif (code =~ /^\d{8}0*$/) || (code =~ /^\d{5}000\d{3}0*$/)
+      Kladr.where("code LIKE ?", "#{code[0..4]}00000000").first
+    elsif (code =~ /^\d{11}0*$/)
+      Kladr.where("code LIKE ?", "#{code[0..7]}00000").first
+    end
+  end
+
+
   # TODO заменить на отношения 1 ко многим
   def street
     Street.where("code LIKE ?", "#{code[0..10]}____00")
@@ -78,5 +90,16 @@ class Kladr < ActiveRecord::Base
     # end
   # end
 
+
+
+# Посмотреть!!!
+# http://railsapps.github.io/twitter-bootstrap-rails.html
+# https://github.com/RailsApps/rails-bootstrap
+# https://github.com/anjlab/bootstrap-rails/issues/53
+# http://stackoverflow.com/questions/18371318/installing-bootstrap-3-on-rails-app
+# https://github.com/anjlab/bootstrap-rails
+
+# посмотреть видеоуроки
+# https://www.google.ru/#newwindow=1&q=rails%204.0%20twitter%20bootstrap%203%20tutorial&safe=off&tbs=qdr:y
 
 end
