@@ -5,13 +5,7 @@ class KladrController < ApplicationController
 
   def show
     @entity = Kladr.find_by_code(params[:code])
-
-    parent = @entity.parent
-    while !parent.nil? do
-      @parents = [parent] + (@parents || [])
-      parent = parent.parent
-    end
-
+    @parents = @entity.parents
     @children = @entity.children
     @street = @entity.street
     @doma = @entity.doma

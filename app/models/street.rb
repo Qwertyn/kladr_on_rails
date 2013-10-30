@@ -1,5 +1,5 @@
 class Street < ActiveRecord::Base
-  self.table_name = "STREET"
+  self.table_name = "street"
   establish_connection(YAML.load_file(File.join(Rails.root, 'config', 'database.yml'))['kladr'])
 
   def doma

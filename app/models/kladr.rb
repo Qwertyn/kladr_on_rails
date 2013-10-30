@@ -1,5 +1,5 @@
 class Kladr < ActiveRecord::Base
-  self.table_name = "KLADR"
+  self.table_name = "kladr"
   establish_connection(YAML.load_file(File.join(Rails.root, 'config', 'database.yml'))['kladr'])
 
   # СС РРР ГГГ ППП АА
@@ -58,6 +58,13 @@ class Kladr < ActiveRecord::Base
     end
   end
 
+  def parents
+    parent = self.parent
+    while !parent.nil? do
+      parents = [parent] + (parents || [])
+      parent = parent.parent
+    end
+  end
 
   # TODO заменить на отношения 1 ко многим
   def street
