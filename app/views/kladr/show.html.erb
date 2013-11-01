@@ -5,16 +5,16 @@
 <%= link_to 'КЛАДР', kladr_path %>
 <% if @parents.present? %>
   <% @parents.each do |parent| %>
-    <%= link_to " / #{parent.name}", kladr_show_path(:code => parent.code) %>
+    <%= link_to " / #{parent.title}", kladr_show_path(:code => parent.code) %>
   <% end %>
 <% end %>
-<%= " / #{@entity.name}" %>
+<%= " / #{@entity.title}" %>
 </p>
 
 <% unless @children.blank? %>
   <% @children.each do |child| %>
    <p><%#= link_to_if !(child.children.blank? && child.street.blank?), child.name, kladr_show_path(:code => child.code) %></p>
-   <p><%= link_to child.name, kladr_show_path(:code => child.code) %></p>
+   <p><%= link_to child.title, kladr_show_path(:code => child.code) %></p>
   <% end %>
 <% end %>
 

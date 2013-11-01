@@ -1,0 +1,1 @@
+VOCABULARY = Socrbase.vocabulary

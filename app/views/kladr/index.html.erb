@@ -5,7 +5,7 @@
   <% @regions.each do |region| %>
     <p>
       <%= region.code[0..1] %>
-      <%= link_to region.name, kladr_show_path(:code => region.code) %>
+      <%= link_to region.title, kladr_show_path(:code => region.code) %>
       <%= region.code %>
     </p>
   <% end %>

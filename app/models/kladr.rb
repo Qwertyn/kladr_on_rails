@@ -14,19 +14,6 @@ class Kladr < ActiveRecord::Base
     where("code LIKE ?", "__00000000000")
   end
 
-  def entity_level_1
-    # тут тока из таблицы кладр
-  end
-
-  def entity_level_2
-    # тут тока из таблицы кладр (наверно)
-  end
-
-  def entity_level_3
-    # а тут прибавить ещё и записи из Улицыи
-  end
-
-
 
   # TODO как-то сделать по-человечески
   def children
@@ -64,6 +51,7 @@ class Kladr < ActiveRecord::Base
       parents = [parent] + (parents || [])
       parent = parent.parent
     end
+    parents || []
   end
 
   # TODO заменить на отношения 1 ко многим
@@ -76,7 +64,22 @@ class Kladr < ActiveRecord::Base
     Doma.where("code LIKE ?", "#{code[0..10]}0000____")
   end
 
+  def level
+    case code
+    when /^\d{2}0*$/
+      '1'
+    when /^\d{5}0*$/
+      '2'
+    when /^\d{8}0*$/
+      '3'
+    when /^\d{11}0*$/
+      '4'
+    end
+  end
 
+  def title
+    name + ' ' + VOCABULARY[level][socr]
+  end
   # вот как-то так надо, но пока не получилось
   # has_many :street, :class_name => 'Street', :conditions => '( STREET.code LIKE ? = "#{code[0..10]}____00"'
 
